@@ -1,0 +1,16 @@
+{
+  "training_date": "2025-09-23T21:50:25.685105",
+  "data_path": "augmented_data",
+  "train_samples": 313,
+  "test_samples": 79,
+  "num_features": 985,
+  "num_classes": 49,
+  "models_trained": [
+    "Naive_Bayes",
+    "SVM",
+    "Random_Forest",
+    "Logistic_Regression",
+    "Neural_Network"
+  ],
+  "best_model": "SVM"
+}

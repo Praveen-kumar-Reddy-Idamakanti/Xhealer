@@ -1,0 +1,192 @@
+{
+  "common_cold": {
+    "disease_name": "Common Cold",
+    "medical_definition": "Viral infection of the upper respiratory tract, most commonly caused by rhinoviruses",
+    "layman_explanation": "A common cold is like your body's way of fighting off a tiny virus that got into your nose or throat. It's your immune system working hard to get rid of the invader, which causes all those annoying symptoms like a runny nose and cough.",
+    "causes": [
+      "Rhinovirus (most common)",
+      "Coronavirus",
+      "Adenovirus",
+      "Respiratory syncytial virus"
+    ],
+    "risk_factors": [
+      "Weakened immune system",
+      "Close contact with infected person",
+      "Seasonal changes",
+      "Stress",
+      "Lack of sleep"
+    ],
+    "body_system": "Respiratory",
+    "severity_level": "Mild to Moderate",
+    "duration": "7-10 days typically",
+    "common_symptoms": [
+      "Runny nose",
+      "Sore throat",
+      "Cough",
+      "Sneezing",
+      "Mild fever",
+      "Fatigue",
+      "Headache"
+    ],
+    "when_to_see_doctor": [
+      "Fever above 101°F for more than 3 days",
+      "Difficulty breathing",
+      "Severe headache or neck stiffness",
+      "Symptoms lasting more than 10 days",
+      "Worsening symptoms after initial improvement"
+    ]
+  },
+  "influenza": {
+    "disease_name": "Influenza (Flu)",
+    "medical_definition": "Acute viral infection of the respiratory tract caused by influenza viruses",
+    "layman_explanation": "The flu is like a really bad cold that comes on suddenly and makes you feel much worse. It's caused by a different virus that's more powerful than the common cold virus, which is why you feel so terrible.",
+    "causes": [
+      "Influenza A virus",
+      "Influenza B virus",
+      "Influenza C virus"
+    ],
+    "risk_factors": [
+      "Weakened immune system",
+      "Age (very young or elderly)",
+      "Chronic health conditions",
+      "Pregnancy",
+      "Close contact with infected person"
+    ],
+    "body_system": "Respiratory",
+    "severity_level": "Moderate to Severe",
+    "duration": "1-2 weeks",
+    "common_symptoms": [
+      "High fever",
+      "Severe body aches",
+      "Fatigue",
+      "Dry cough",
+      "Headache",
+      "Chills",
+      "Sore throat",
+      "Runny nose"
+    ],
+    "when_to_see_doctor": [
+      "Difficulty breathing or shortness of breath",
+      "Persistent chest pain",
+      "Severe dehydration",
+      "High fever that doesn't respond to medication",
+      "Confusion or dizziness",
+      "Symptoms improve then worsen again"
+    ]
+  },
+  "pneumonia": {
+    "disease_name": "Pneumonia",
+    "medical_definition": "Inflammation of the lungs caused by infection, resulting in fluid or pus filling the air sacs",
+    "layman_explanation": "Pneumonia is when your lungs get infected and filled with fluid, making it hard to breathe. It's like your lungs are trying to fight off an infection, but they get so full of fluid that breathing becomes difficult.",
+    "causes": [
+      "Bacteria (most common)",
+      "Viruses",
+      "Fungi",
+      "Mycoplasma",
+      "Aspiration of foreign material"
+    ],
+    "risk_factors": [
+      "Age (very young or elderly)",
+      "Weakened immune system",
+      "Chronic lung disease",
+      "Smoking",
+      "Recent viral infection"
+    ],
+    "body_system": "Respiratory",
+    "severity_level": "Moderate to Severe",
+    "duration": "1-3 weeks",
+    "common_symptoms": [
+      "Cough with phlegm",
+      "Fever",
+      "Difficulty breathing",
+      "Chest pain",
+      "Fatigue",
+      "Sweating",
+      "Chills",
+      "Nausea"
+    ],
+    "when_to_see_doctor": [
+      "Difficulty breathing",
+      "Chest pain",
+      "High fever (above 102°F)",
+      "Coughing up blood",
+      "Confusion (especially in elderly)",
+      "Blue lips or fingernails"
+    ]
+  },
+  "bronchitis": {
+    "disease_name": "Bronchitis",
+    "medical_definition": "Inflammation of the bronchial tubes that carry air to and from the lungs",
+    "layman_explanation": "Bronchitis is when the tubes that carry air to your lungs get irritated and swollen. It's like having a sore throat, but in your chest, which makes you cough a lot to try to clear out the irritation.",
+    "causes": [
+      "Viral infection (most common)",
+      "Bacterial infection",
+      "Irritants (smoke, dust, pollution)",
+      "Gastroesophageal reflux"
+    ],
+    "risk_factors": [
+      "Smoking",
+      "Exposure to secondhand smoke",
+      "Weakened immune system",
+      "Chronic lung disease",
+      "Age (very young or elderly)"
+    ],
+    "body_system": "Respiratory",
+    "severity_level": "Mild to Moderate",
+    "duration": "1-3 weeks",
+    "common_symptoms": [
+      "Persistent cough",
+      "Mucus production",
+      "Chest discomfort",
+      "Mild fever",
+      "Fatigue",
+      "Wheezing",
+      "Shortness of breath"
+    ],
+    "when_to_see_doctor": [
+      "Cough lasting more than 3 weeks",
+      "High fever",
+      "Coughing up blood",
+      "Difficulty breathing",
+      "Wheezing that doesn't improve",
+      "Chest pain"
+    ]
+  },
+  "asthma": {
+    "disease_name": "Asthma",
+    "medical_definition": "Chronic inflammatory disease of the airways characterized by reversible airflow obstruction and bronchospasm",
+    "layman_explanation": "Asthma is when your breathing tubes get swollen and tight, making it hard to breathe. It's like trying to breathe through a straw that keeps getting smaller. This can happen when you're around things that irritate your lungs.",
+    "causes": [
+      "Genetic factors",
+      "Environmental triggers",
+      "Allergies",
+      "Respiratory infections",
+      "Exercise",
+      "Stress"
+    ],
+    "risk_factors": [
+      "Family history of asthma",
+      "Allergies",
+      "Exposure to tobacco smoke",
+      "Obesity",
+      "Respiratory infections in childhood"
+    ],
+    "body_system": "Respiratory",
+    "severity_level": "Mild to Severe",
+    "duration": "Chronic (lifelong)",
+    "common_symptoms": [
+      "Wheezing",
+      "Shortness of breath",
+      "Chest tightness",
+      "Coughing (especially at night)",
+      "Difficulty breathing during exercise"
+    ],
+    "when_to_see_doctor": [
+      "Frequent asthma attacks",
+      "Symptoms that interfere with daily activities",
+      "Emergency inhaler use more than twice a week",
+      "Symptoms that wake you up at night",
+      "Severe breathing difficulty"
+    ]
+  }
+}

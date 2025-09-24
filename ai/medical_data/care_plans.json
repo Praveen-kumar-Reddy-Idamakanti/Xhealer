@@ -1,0 +1,57 @@
+{
+  "common_cold": {
+    "immediate_care": [
+      "Get plenty of rest to help your body fight the virus",
+      "Stay hydrated with water, herbal teas, or clear broths",
+      "Use a humidifier or steam to ease congestion",
+      "Gargle with warm salt water for sore throat relief"
+    ],
+    "medications": [
+      "Acetaminophen or ibuprofen for fever and body aches",
+      "Decongestant nasal sprays (use sparingly, no more than 3 days)",
+      "Cough suppressants if cough is disruptive to sleep",
+      "Throat lozenges for sore throat relief"
+    ],
+    "home_remedies": [
+      "Chicken soup (helps with congestion and provides nutrients)",
+      "Honey and lemon in warm water (soothes throat)",
+      "Ginger tea (reduces inflammation)",
+      "Steam inhalation with eucalyptus oil"
+    ],
+    "warning_signs": [
+      "Fever above 101°F for more than 3 days",
+      "Difficulty breathing or shortness of breath",
+      "Severe headache or neck stiffness",
+      "Symptoms lasting more than 10 days",
+      "Worsening symptoms after initial improvement"
+    ]
+  },
+  "influenza": {
+    "immediate_care": [
+      "Stay home and rest completely",
+      "Drink plenty of fluids to prevent dehydration",
+      "Use fever-reducing medications as directed",
+      "Apply cool compresses for fever relief"
+    ],
+    "medications": [
+      "Antiviral medications (if started within 48 hours)",
+      "Acetaminophen or ibuprofen for fever and pain",
+      "Cough suppressants for dry cough",
+      "Decongestants for nasal congestion"
+    ],
+    "home_remedies": [
+      "Warm fluids like tea with honey",
+      "Chicken soup for nutrition and hydration",
+      "Rest in a comfortable, well-ventilated room",
+      "Use a humidifier to ease breathing"
+    ],
+    "warning_signs": [
+      "Difficulty breathing or shortness of breath",
+      "Persistent chest pain or pressure",
+      "Severe dehydration (dry mouth, no urination)",
+      "High fever that doesn't respond to medication",
+      "Confusion or dizziness",
+      "Symptoms improve then worsen again"
+    ]
+  }
+}

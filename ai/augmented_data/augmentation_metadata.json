@@ -1,0 +1,192 @@
+{
+  "original_samples": 49,
+  "total_augmented_samples": 392,
+  "augmentation_factor": 8.0,
+  "augmentation_types": {
+    "symptom_variations": 147,
+    "partial_symptoms": 147,
+    "noisy_symptoms": 49,
+    "original": 49
+  },
+  "symptom_variations": {
+    "pain": [
+      "ache",
+      "discomfort",
+      "soreness",
+      "tenderness"
+    ],
+    "fever": [
+      "high temperature",
+      "elevated temperature",
+      "pyrexia"
+    ],
+    "nausea": [
+      "feeling sick",
+      "queasy",
+      "sick to stomach"
+    ],
+    "vomiting": [
+      "throwing up",
+      "puking",
+      "emesis"
+    ],
+    "fatigue": [
+      "tiredness",
+      "exhaustion",
+      "weakness",
+      "lethargy"
+    ],
+    "headache": [
+      "head pain",
+      "cephalgia",
+      "head ache"
+    ],
+    "cough": [
+      "coughing",
+      "hacking",
+      "productive cough",
+      "dry cough"
+    ],
+    "shortness of breath": [
+      "difficulty breathing",
+      "trouble breathing",
+      "dyspnea"
+    ],
+    "chest pain": [
+      "chest discomfort",
+      "chest pressure",
+      "thoracic pain"
+    ],
+    "abdominal pain": [
+      "stomach pain",
+      "belly ache",
+      "tummy pain"
+    ],
+    "diarrhea": [
+      "loose stools",
+      "watery stools",
+      "frequent bowel movements"
+    ],
+    "constipation": [
+      "hard stools",
+      "difficulty passing stool",
+      "infrequent bowel movements"
+    ],
+    "rash": [
+      "skin rash",
+      "eruption",
+      "skin irritation"
+    ],
+    "itching": [
+      "pruritus",
+      "scratching",
+      "itchy sensation"
+    ],
+    "swelling": [
+      "edema",
+      "inflammation",
+      "puffiness"
+    ],
+    "bleeding": [
+      "hemorrhage",
+      "blood loss",
+      "hemorrhaging"
+    ],
+    "dizziness": [
+      "lightheadedness",
+      "vertigo",
+      "feeling faint"
+    ],
+    "weight loss": [
+      "unintended weight loss",
+      "weight reduction",
+      "slimming"
+    ],
+    "weight gain": [
+      "weight increase",
+      "weight addition",
+      "gaining weight"
+    ],
+    "loss of appetite": [
+      "decreased appetite",
+      "poor appetite",
+      "anorexia"
+    ]
+  },
+  "body_system_symptoms": {
+    "respiratory": [
+      "cough",
+      "shortness of breath",
+      "chest pain",
+      "wheezing",
+      "sneezing",
+      "runny nose",
+      "stuffy nose",
+      "sore throat",
+      "nasal congestion"
+    ],
+    "cardiovascular": [
+      "chest pain",
+      "shortness of breath",
+      "palpitations",
+      "dizziness",
+      "fatigue",
+      "swelling in legs",
+      "rapid heartbeat"
+    ],
+    "gastrointestinal": [
+      "abdominal pain",
+      "nausea",
+      "vomiting",
+      "diarrhea",
+      "constipation",
+      "loss of appetite",
+      "bloating",
+      "belching",
+      "heartburn"
+    ],
+    "genitourinary": [
+      "painful urination",
+      "frequent urination",
+      "blood in urine",
+      "pelvic pain",
+      "genital discharge",
+      "vaginal bleeding"
+    ],
+    "neurological": [
+      "headache",
+      "dizziness",
+      "confusion",
+      "numbness",
+      "weakness",
+      "seizures",
+      "memory problems",
+      "difficulty concentrating"
+    ],
+    "dermatological": [
+      "rash",
+      "itching",
+      "skin lesions",
+      "swelling",
+      "redness",
+      "dry skin",
+      "skin discoloration"
+    ],
+    "musculoskeletal": [
+      "joint pain",
+      "muscle pain",
+      "back pain",
+      "stiffness",
+      "swelling",
+      "limited range of motion"
+    ],
+    "endocrine": [
+      "weight changes",
+      "fatigue",
+      "thirst",
+      "frequent urination",
+      "temperature intolerance",
+      "mood changes"
+    ]
+  }
+}
