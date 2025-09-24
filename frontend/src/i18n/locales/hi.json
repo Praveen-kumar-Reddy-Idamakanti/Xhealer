@@ -1,0 +1,26 @@
+{
+  "language": {
+    "select": "अपनी भाषा चुनें",
+    "description": "जारी रखने के लिए अपनी पसंदीदा भाषा चुनें",
+    "continue": "जारी रखें"
+  },
+  "auth": {
+    "welcome": "वापसी पर स्वागत",
+    "description": "अपने स्वास्थ्य डैशबोर्ड तक पहुंचने के लिए साइन इन करें",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "phone": "फ़ोन नंबर",
+    "signIn": "साइन इन",
+    "sendOTP": "OTP भेजें"
+  },
+  "dashboard": {
+    "greeting": "सुप्रभात",
+    "subtitle": "आज आप कैसा महसूस कर रहे हैं?",
+    "healthChat": "स्वास्थ्य चैट",
+    "healthChatDesc": "अपने लक्षणों का विश्लेषण करें",
+    "findHospitals": "अस्पताल खोजें",
+    "findHospitalsDesc": "निकटतम चिकित्सा सुविधाएं",
+    "consultDoctor": "डॉक्टर से सलाह लें",
+    "consultDoctorDesc": "अपॉइंटमेंट बुक करें"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "language": {
+    "select": "Choose Your Language",
+    "description": "Select your preferred language to continue",
+    "continue": "Continue"
+  },
+  "auth": {
+    "welcome": "Welcome Back",
+    "description": "Sign in to access your health dashboard",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone Number",
+    "signIn": "Sign In",
+    "sendOTP": "Send OTP"
+  },
+  "dashboard": {
+    "greeting": "Good Morning",
+    "subtitle": "How are you feeling today?",
+    "healthChat": "Health Chat",
+    "healthChatDesc": "Analyze your symptoms",
+    "findHospitals": "Find Hospitals",
+    "findHospitalsDesc": "Nearby medical facilities",
+    "consultDoctor": "Consult Doctor",
+    "consultDoctorDesc": "Book appointments",
+    "emergency": "Emergency Services",
+    "callAmbulance": "Call Ambulance (108)",
+    "firstAid": "First Aid Guide"
+  },
+  "chat": {
+    "title": "Health Assistant",
+    "subtitle": "AI-powered symptom analysis",
+    "placeholder": "Describe your symptoms...",
+    "listening": "Listening... Speak now",
+    "analysisResults": "Analysis Results",
+    "confidence": "Confidence",
+    "keySymptoms": "Key symptoms identified:",
+    "disclaimer": "⚠️ Medical Disclaimer: This analysis is for informational purposes only. Always consult with a healthcare professional for proper diagnosis and treatment."
+  },
+  "hospitals": {
+    "title": "Nearby Hospitals",
+    "search": "Search hospitals or specialties...",
+    "emergency": "Emergency? Call 108 for immediate assistance",
+    "callNow": "Call Now",
+    "callHospital": "Call Hospital",
+    "getDirections": "Get Directions",
+    "openNow": "Open Now",
+    "closed": "Closed",
+    "emergencyServices": "24/7 Emergency",
+    "specialties": "Specialties:"
+  },
+  "doctors": {
+    "title": "Doctor Consultation",
+    "subtitle": "Book appointments with verified doctors",
+    "bookAppointment": "Book Appointment",
+    "videoCall": "Video Call",
+    "callClinic": "Call Clinic",
+    "experience": "Experience",
+    "rating": "Rating",
+    "fee": "Fee",
+    "nextAvailable": "Next Available",
+    "languages": "Languages:",
+    "availableToday": "Available Today",
+    "videoConsultation": "Video Consultation"
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Manage your health information",
+    "personalInfo": "Personal Information",
+    "emergencyContacts": "Emergency Contacts",
+    "consultations": "Booked Consultations",
+    "chatHistory": "Symptom Analysis History",
+    "medicalReports": "Medical Reports",
+    "noReports": "No medical reports uploaded",
+    "uploadReport": "Upload Report",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "back": "Back",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error occurred"
+  }
+}
