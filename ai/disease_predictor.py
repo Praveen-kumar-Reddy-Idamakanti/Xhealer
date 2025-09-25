@@ -115,8 +115,8 @@ class DiseasePredictor:
         # Remove extra whitespace
         text = re.sub(r'\s+', ' ', text)
         
-        # Remove special characters but keep medical terms
-        text = re.sub(r'[^\w\s;]', ' ', text)
+        # Remove special characters but keep medical terms and separators
+        text = re.sub(r'[^\w\s;,]', ' ', text)
         
         # Remove extra spaces
         text = text.strip()
@@ -135,8 +135,36 @@ class DiseasePredictor:
         cleaned_text = self.clean_text(symptoms_text)
         cleaned_text = self.standardize_medical_terms(cleaned_text)
         
-        # Split symptoms by semicolon
-        symptoms_list = [s.strip() for s in cleaned_text.split(';') if s.strip()]
+        # Enhanced symptom parsing - handle multiple separators
+        symptoms_list = []
+        
+        # First try semicolon separation (current format)
+        if ';' in cleaned_text:
+            symptoms_list = [s.strip() for s in cleaned_text.split(';') if s.strip()]
+        # Then try comma separation (natural language)
+        elif ',' in cleaned_text:
+            symptoms_list = [s.strip() for s in cleaned_text.split(',') if s.strip()]
+        # Then try common conjunctions
+        else:
+            conjunctions = [' and ', ' with ', ' along with ', ' plus ', ' also ']
+            found_conjunction = False
+            
+            for conjunction in conjunctions:
+                if conjunction in cleaned_text:
+                    symptoms_list = [s.strip() for s in cleaned_text.split(conjunction) if s.strip()]
+                    found_conjunction = True
+                    break
+            
+            # If no separators found, treat as single symptom
+            if not found_conjunction:
+                symptoms_list = [cleaned_text.strip()] if cleaned_text.strip() else []
+        
+        # Additional cleaning for each symptom
+        symptoms_list = [
+            re.sub(r'\b(a|an|the|some|mild|severe|bad|terrible|awful)\b', '', symptom).strip()
+            for symptom in symptoms_list
+            if symptom.strip()
+        ]
         
         # Create combined text for TF-IDF
         symptoms_combined = ' '.join(symptoms_list)
@@ -257,13 +285,52 @@ class DiseasePredictor:
                 'suggestions': []
             }
         
-        symptoms_list = [s.strip() for s in symptoms_text.split(';') if s.strip()]
+        # Use the same parsing logic as preprocess_symptoms
+        cleaned_text = self.clean_text(symptoms_text)
+        
+        # Enhanced symptom parsing - handle multiple separators
+        symptoms_list = []
+        
+        # First try semicolon separation (current format)
+        if ';' in cleaned_text:
+            symptoms_list = [s.strip() for s in cleaned_text.split(';') if s.strip()]
+        # Then try comma separation (natural language)
+        elif ',' in cleaned_text:
+            symptoms_list = [s.strip() for s in cleaned_text.split(',') if s.strip()]
+        # Then try common conjunctions
+        else:
+            conjunctions = [' and ', ' with ', ' along with ', ' plus ', ' also ']
+            found_conjunction = False
+            
+            for conjunction in conjunctions:
+                if conjunction in cleaned_text:
+                    symptoms_list = [s.strip() for s in cleaned_text.split(conjunction) if s.strip()]
+                    found_conjunction = True
+                    break
+            
+            # If no separators found, treat as single symptom
+            if not found_conjunction:
+                symptoms_list = [cleaned_text.strip()] if cleaned_text.strip() else []
+        
+        # Additional cleaning for each symptom
+        symptoms_list = [
+            re.sub(r'\b(a|an|the|some|mild|severe|bad|terrible|awful)\b', '', symptom).strip()
+            for symptom in symptoms_list
+            if symptom.strip()
+        ]
+        
+        if len(symptoms_list) < 1:
+            return {
+                'valid': False,
+                'message': 'Please enter at least one symptom.',
+                'suggestions': ['Try describing your symptoms in natural language', 'Example: "fever, headache, fatigue"']
+            }
         
         if len(symptoms_list) < 2:
             return {
                 'valid': False,
                 'message': 'Please enter at least 2 symptoms for better accuracy.',
-                'suggestions': ['Add more specific symptoms', 'Include severity indicators (mild, severe, etc.)']
+                'suggestions': ['Add more specific symptoms', 'Include severity indicators (mild, severe, etc.)', 'Example: "fever, headache, fatigue"']
             }
         
         if len(symptoms_list) > 15:

@@ -16,11 +16,15 @@ import SOSButton from '@/components/SOSButton';
 import MobileMenu from '@/components/MobileMenu';
 import ChatInterface from '@/components/ChatInterface';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useAuth } from '@/hooks/useAuth';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const [userName] = useState('Sarah');
+  const { user, profile, userType, isGuest, loading } = useAuth();
+  
+  // Get display name
+  const userName = profile?.full_name || user?.user_metadata?.full_name || 'User';
 
   const quickActions = [
     {
@@ -62,9 +66,11 @@ const Dashboard = () => {
             <div className="text-center">
               <h1 className="text-lg font-bold text-foreground">HealthCare AI</h1>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
-              <User className="h-5 w-5" />
-            </Button>
+            {!isGuest && (
+              <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
+                <User className="h-5 w-5" />
+              </Button>
+            )}
           </div>
         </div>
 
@@ -88,9 +94,11 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold text-foreground">Good Morning, {userName}</h1>
             <p className="text-muted-foreground">Your AI health companion is ready to help</p>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
-            <User className="h-5 w-5" />
-          </Button>
+          {!isGuest && (
+            <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
+              <User className="h-5 w-5" />
+            </Button>
+          )}
         </div>
       </div>
 

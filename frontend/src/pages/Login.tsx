@@ -4,33 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/hooks/useAuth';
 import medicalHero from '@/assets/medical-hero.jpg';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, isGuest, loading } = useAuth();
 
   useEffect(() => {
-    // Check if user is already logged in
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        navigate('/dashboard');
-      }
-    };
-
-    checkUser();
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (session) {
-          navigate('/dashboard');
-        }
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    // Redirect if already authenticated or guest
+    if (!loading && (user || isGuest)) {
+      navigate('/dashboard');
+    }
+  }, [user, isGuest, loading, navigate]);
 
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
@@ -45,8 +31,10 @@ const Login = () => {
     }
   };
 
+  const { signInAsGuest } = useAuth();
+
   const handleGuestLogin = () => {
-    // For guest access, we'll just navigate to dashboard without authentication
+    signInAsGuest();
     navigate('/dashboard');
   };
 

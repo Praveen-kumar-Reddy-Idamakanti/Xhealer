@@ -225,35 +225,48 @@ const ChatInterface = () => {
     // Remove common phrases and clean up the input
     let cleanedInput = input.toLowerCase()
       .replace(/^(i have|i'm having|i am having|i feel|i'm feeling|i am feeling|symptoms? are?|my symptoms? are?)/, '')
-      .replace(/\b(and|with|along with|plus|also)\b/g, ';')
-      .replace(/\b(,|\.|!|\?)\b/g, '')
       .trim();
     
-    // Split by semicolons and clean each symptom
-    const symptoms = cleanedInput
-      .split(';')
-      .map(symptom => symptom.trim())
-      .filter(symptom => symptom.length > 0)
-      .map(symptom => {
-        // Remove common filler words
-        return symptom.replace(/\b(a|an|the|some|mild|severe|bad|terrible|awful)\b/g, '').trim();
-      })
-      .filter(symptom => symptom.length > 0);
+    // First, try to split by commas (most common natural language separator)
+    let symptoms: string[] = [];
     
-    // If no semicolons found, try to split by common conjunctions
-    if (symptoms.length === 1) {
-      const singleSymptom = symptoms[0];
+    if (cleanedInput.includes(',')) {
+      symptoms = cleanedInput
+        .split(',')
+        .map(symptom => symptom.trim())
+        .filter(symptom => symptom.length > 0);
+    } else {
+      // If no commas, try to split by common conjunctions
       const conjunctions = [' and ', ' with ', ' along with ', ' plus ', ' also '];
+      let foundConjunction = false;
       
       for (const conjunction of conjunctions) {
-        if (singleSymptom.includes(conjunction)) {
-          return singleSymptom.split(conjunction)
+        if (cleanedInput.includes(conjunction)) {
+          symptoms = cleanedInput
+            .split(conjunction)
             .map(s => s.trim())
-            .filter(s => s.length > 0)
-            .join(';');
+            .filter(s => s.length > 0);
+          foundConjunction = true;
+          break;
         }
       }
+      
+      // If no conjunctions found, treat as single symptom
+      if (!foundConjunction) {
+        symptoms = [cleanedInput];
+      }
     }
+    
+    // Clean each symptom
+    symptoms = symptoms
+      .map(symptom => {
+        // Remove common filler words but keep medical terms
+        return symptom
+          .replace(/\b(a|an|the|some|mild|severe|bad|terrible|awful)\b/g, '')
+          .replace(/[.!?]+$/, '') // Remove trailing punctuation
+          .trim();
+      })
+      .filter(symptom => symptom.length > 0);
     
     return symptoms.join(';');
   };

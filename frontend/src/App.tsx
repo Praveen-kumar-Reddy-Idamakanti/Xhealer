@@ -11,6 +11,8 @@ import HospitalsPage from "./pages/HospitalsPage";
 import DoctorConsultation from "./pages/DoctorConsultation";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+// Import test utility for development
+import "./utils/testEmailJS";
 
 const queryClient = new QueryClient();
 

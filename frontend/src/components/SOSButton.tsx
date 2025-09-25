@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { AlertTriangle, Phone } from 'lucide-react';
+import { AlertTriangle, Phone, MapPin, Mail, Loader2 } from 'lucide-react';
+import { sendEmergencyAlert, initializeEmailJS, LocationData } from '@/services/emailService';
 
 const SOSButton = () => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isCountdownActive, setIsCountdownActive] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
+  const [locationData, setLocationData] = useState<LocationData | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Initialize EmailJS on component mount
+  useEffect(() => {
+    initializeEmailJS();
+  }, []);
 
   const handleSOSClick = () => {
     setIsConfirmOpen(true);
@@ -43,16 +53,35 @@ const SOSButton = () => {
     setCountdown(10);
   };
 
-  const triggerEmergency = () => {
-    // Mock emergency actions
-    console.log('Emergency triggered');
-    // Here would be:
-    // 1. Call emergency number
-    // 2. Send notifications to emergency contacts
-    // 3. Log emergency event in Firestore
-    // 4. Send location data
+  const triggerEmergency = async () => {
+    setIsLoading(true);
+    setError(null);
     
-    alert('Emergency services have been contacted. Help is on the way.');
+    try {
+      // Send emergency alert with location
+      const result = await sendEmergencyAlert('Emergency SOS', 'User has activated emergency SOS button. Please provide immediate assistance.');
+      
+      if (result.success) {
+        setLocationData(result.locationData || null);
+        setEmailSent(true);
+        
+        // Show success message with location details
+        const locationInfo = result.locationData 
+          ? `\nLocation: ${result.locationData.latitude}, ${result.locationData.longitude}\nMap: ${result.locationData.mapLink}`
+          : '';
+        
+        alert(`Emergency services have been contacted. Help is on the way!${locationInfo}`);
+      } else {
+        setError(result.error || 'Failed to send emergency alert');
+        alert(`Emergency alert failed: ${result.error || 'Unknown error'}`);
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      setError(errorMessage);
+      alert(`Emergency alert failed: ${errorMessage}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isCountdownActive) {
@@ -62,6 +91,12 @@ const SOSButton = () => {
           <div className="text-center">
             <div className="text-2xl font-bold">{countdown}</div>
             <div className="text-xs">Calling emergency</div>
+            {isLoading && (
+              <div className="flex items-center justify-center mt-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span className="text-xs ml-1">Getting location...</span>
+              </div>
+            )}
           </div>
         </div>
         <Button
@@ -69,6 +104,7 @@ const SOSButton = () => {
           size="sm"
           className="mt-2 w-full bg-white"
           onClick={handleCancel}
+          disabled={isLoading}
         >
           Cancel
         </Button>
@@ -106,12 +142,16 @@ const SOSButton = () => {
               <span>Call emergency services (108)</span>
             </div>
             <div className="flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4" />
-              <span>Notify your emergency contacts</span>
+              <Mail className="h-4 w-4" />
+              <span>Send email alert to emergency contacts</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
+              <span>Share your current location with GPS coordinates</span>
             </div>
             <div className="flex items-center gap-2">
               <AlertTriangle className="h-4 w-4" />
-              <span>Share your current location</span>
+              <span>Include Google Maps link for easy navigation</span>
             </div>
           </div>
 

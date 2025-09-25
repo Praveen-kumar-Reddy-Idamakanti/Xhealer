@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, MapPin, Phone, Navigation, Clock, Search } from 'lucide-react';
+import { ArrowLeft, MapPin, Phone, Navigation, Clock, Search, RefreshCw, Copy, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface Hospital {
@@ -23,6 +23,10 @@ const HospitalsPage = () => {
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [locationAccuracy, setLocationAccuracy] = useState<number | null>(null);
+  const [locationTimestamp, setLocationTimestamp] = useState<Date | null>(null);
+  const [isRefreshingLocation, setIsRefreshingLocation] = useState(false);
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
 
   const mockHospitals: Hospital[] = [
     {
@@ -71,21 +75,35 @@ const HospitalsPage = () => {
     }
   ];
 
-  useEffect(() => {
-    // Get user location
+  const getCurrentLocation = () => {
     if (navigator.geolocation) {
+      setIsRefreshingLocation(true);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setUserLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude
           });
+          setLocationAccuracy(position.coords.accuracy);
+          setLocationTimestamp(new Date());
+          setIsRefreshingLocation(false);
         },
         (error) => {
           console.error('Error getting location:', error);
+          setIsRefreshingLocation(false);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000 // 5 minutes
         }
       );
     }
+  };
+
+  useEffect(() => {
+    // Get user location on component mount
+    getCurrentLocation();
 
     // Load hospitals (sorted by distance)
     const sortedHospitals = mockHospitals.sort((a, b) => a.distance - b.distance);
@@ -104,6 +122,26 @@ const HospitalsPage = () => {
   const handleNavigate = (address: string) => {
     const encodedAddress = encodeURIComponent(address);
     window.open(`https://www.google.com/maps/search/${encodedAddress}`, '_blank');
+  };
+
+  const copyCoordinates = async () => {
+    if (userLocation) {
+      const coordinates = `${userLocation.lat}, ${userLocation.lng}`;
+      try {
+        await navigator.clipboard.writeText(coordinates);
+        setCopiedToClipboard(true);
+        setTimeout(() => setCopiedToClipboard(false), 2000);
+      } catch (err) {
+        console.error('Failed to copy coordinates:', err);
+      }
+    }
+  };
+
+  const openInMaps = () => {
+    if (userLocation) {
+      const url = `https://www.google.com/maps?q=${userLocation.lat},${userLocation.lng}`;
+      window.open(url, '_blank');
+    }
   };
 
   return (
@@ -139,13 +177,126 @@ const HospitalsPage = () => {
           </CardContent>
         </Card>
 
-        {/* Location Status */}
-        {userLocation && (
+        {/* Live Location Display */}
+        {userLocation ? (
           <Card className="shadow-card-custom border-accent">
             <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-accent">
-                <MapPin className="h-4 w-4" />
-                <span className="text-sm font-medium">Location detected - showing nearest hospitals</span>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-accent">
+                    <MapPin className="h-4 w-4" />
+                    <span className="text-sm font-medium">Live Location Detected</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={getCurrentLocation}
+                    disabled={isRefreshingLocation}
+                    className="h-8"
+                  >
+                    <RefreshCw className={`h-3 w-3 mr-1 ${isRefreshingLocation ? 'animate-spin' : ''}`} />
+                    Refresh
+                  </Button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Coordinates */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground">Coordinates</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={copyCoordinates}
+                        className="h-6 px-2"
+                      >
+                        {copiedToClipboard ? (
+                          <Check className="h-3 w-3 text-green-600" />
+                        ) : (
+                          <Copy className="h-3 w-3" />
+                        )}
+                      </Button>
+                    </div>
+                    <div className="bg-muted/50 rounded-md p-2 font-mono text-sm">
+                      <div>Lat: {userLocation.lat.toFixed(6)}</div>
+                      <div>Lng: {userLocation.lng.toFixed(6)}</div>
+                    </div>
+                  </div>
+                  
+                  {/* Location Details */}
+                  <div className="space-y-2">
+                    <span className="text-xs font-medium text-muted-foreground">Location Details</span>
+                    <div className="space-y-1 text-sm">
+                      {locationAccuracy && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Accuracy:</span>
+                          <span>{locationAccuracy.toFixed(0)}m</span>
+                        </div>
+                      )}
+                      {locationTimestamp && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Updated:</span>
+                          <span>{locationTimestamp.toLocaleTimeString()}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex gap-2 pt-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={openInMaps}
+                    className="flex-1"
+                  >
+                    <Navigation className="h-3 w-3 mr-1" />
+                    View in Maps
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={copyCoordinates}
+                    className="flex-1"
+                  >
+                    {copiedToClipboard ? (
+                      <>
+                        <Check className="h-3 w-3 mr-1 text-green-600" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3 w-3 mr-1" />
+                        Copy Coords
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card className="shadow-card-custom border-orange-200">
+            <CardContent className="p-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-orange-600">
+                  <MapPin className="h-4 w-4" />
+                  <span className="text-sm font-medium">Location Access Required</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Enable location access to see hospitals near you and get accurate distance calculations.
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={getCurrentLocation}
+                  disabled={isRefreshingLocation}
+                  className="w-full"
+                >
+                  <RefreshCw className={`h-3 w-3 mr-1 ${isRefreshingLocation ? 'animate-spin' : ''}`} />
+                  {isRefreshingLocation ? 'Detecting Location...' : 'Enable Location Access'}
+                </Button>
               </div>
             </CardContent>
           </Card>
